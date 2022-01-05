@@ -1,0 +1,27 @@
+html {
+    scroll-behavior: smooth;
+}
+/* #pizza-img {
+    filter: brightness(70%);
+    transition:0.5s;
+}
+#pizza-img:hover {
+    filter: brightness(100%);
+} */
+#code-lab-pizza{
+    animation:shape 1s infinite;
+}
+@keyframes shape {
+    from {
+        transform: scale(1.02);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+/* #pizza-card{
+    filter: brightness(60%);
+}
+#pizza-card:hover{
+    filter: brightness(100%);
+} */
