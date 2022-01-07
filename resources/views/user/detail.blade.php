@@ -16,10 +16,10 @@
             <span class="text-primary">{{ $pizza->pizza_name }}</span>
             <hr>
             <h5>Price</h5>
-            <span class="text-primary">{{ $pizza->price }}</span>
+            <span class="text-primary">{{ $pizza->price }} <small class="text-dark fs-4">kyats</small></span>
             <hr>
             <h5>Discount</h5>
-            <span class="text-primary">{{ $pizza->discount_price }}</span>
+            <span class="text-primary">{{ $pizza->discount_price }} <small class="text-dark fs-4">kyats</small></span>
             <hr>
             <h5 >Buy 1 get 1</h5>
             @if ($pizza->buy_one_get_one_status == 1)
@@ -29,10 +29,10 @@
             @endif
             <hr>
             <h5>Waiting Time</h5>
-            <span class="text-primary">{{ $pizza->waiting_time }}</span>
+            <span class="text-primary">{{ $pizza->waiting_time }} <small class="text-dark fs-5">Minutes </small> </span>
             <hr>
             <h5>Description</h5>
-            <span class="text-primary">{{ $pizza->description }}</span>
+            <span class="text-primary">{{ $pizza->description }} </span>
             <hr>
             <h5 class="text-danger">Total Price</h5>
             <span class="text-danger">{{$pizza['price']-$pizza['discount_price']}}</span>

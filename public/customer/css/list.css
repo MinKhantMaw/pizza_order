@@ -1,6 +1,10 @@
 html {
     scroll-behavior: smooth;
 }
+.item:hover{
+    
+    color: #b95555;
+}
 /* #pizza-img {
     filter: brightness(70%);
     transition:0.5s;

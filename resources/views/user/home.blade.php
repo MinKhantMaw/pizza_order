@@ -28,13 +28,19 @@
                             </div>
                         </form>
 
-                        <div class="">
-                            <div class="m-2 p-2">All</div>
-                            <div class="m-2 p-2">Seafood</div>
-                            <div class="m-2 p-2">Chicken</div>
-                            <div class="m-2 p-2">Cheese</div>
-                            <div class="m-2 p-2">BBQ</div>
-                            <div class="m-2 p-2">Ocean</div>
+                        <div class="text-dark">
+                            <a href="{{route('user#index')}}" class="text-decoration-none item">
+                                <div class="m-2 p-2">All</div>
+                            </a>
+                            @foreach ($category as $item)
+                                <a href="{{route('user#itemSearch',$item->category_id)}}" class="text-decoration-none item">
+                                    <div class="m-2 p-2">{{ $item->category_name }}</div>
+                                </a>
+                                {{-- <div class="m-2 p-2">{{$category['category_name']}}</div> --}}
+                                {{-- <div class="m-2 p-2">{{$category['category_name']}}</div> --}}
+                                {{-- <div class="m-2 p-2">{{$category['category_name']}}</div> --}}
+                                {{-- <div class="m-2 p-2">{{$category['category_name']}}</div> --}}
+                            @endforeach
                         </div>
                         <hr>
                         <div class="text-center m-4 p-2">
@@ -86,7 +92,8 @@
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{route('user#pizzaDetails',$item['pizza_id'])}}">More
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                            href="{{ route('user#pizzaDetails', $item['pizza_id']) }}">More
                                             Details</a></div>
                                 </div>
                             </div>
@@ -120,8 +127,8 @@
                     <p class="text-danger">{{ $errors->first('email') }}</p>
                 @endif
                 <textarea class="form-control my-3" name="message" rows="3" placeholder="Enter Message">
-                            {{ old('message') }}
-                    </textarea>
+                                    {{ old('message') }}
+                            </textarea>
                 @if ($errors->has('message'))
                     <p class="text-danger">{{ $errors->first('message') }}</p>
                 @endif

@@ -24,7 +24,7 @@
                                               action="{{ route('admin#insertPizza') }}" enctype="multipart/form-data">
                                               @csrf
                                               <div class="form-group row">
-                                                  <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                                  <label for="inputName"  class="col-sm-2 col-form-label">Name</label>
                                                   <div class="col-sm-10">
                                                       <input type="text" class="form-control" name="name"
                                                           placeholder="Enter Pizza Name">
