@@ -62,6 +62,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/admin/delete/{id}', 'AuthController@adminDelete')->name('admin#adminDelete');
     Route::get('admin/search', 'AuthController@adminSearch')->name('admin#adminSearch');
 
+    Route::get('contact/list/','ContactController@contactList')->name('admin#contactList');
+    Route::get('contact/search/','ContactController@contactSearch')->name('admin#contactSearch');
 });
 
 Route::group(['prefix' => 'user'], function () {
@@ -69,5 +71,5 @@ Route::group(['prefix' => 'user'], function () {
 
 // Contact Controller
     Route::post('contact/create', 'Admin\ContactController@contactCreate')->name('user#contactCreate');
-
+    Route::get('pizza/details/{id}', 'UserController@pizzaDetails')->name('user#pizzaDetails');
 });

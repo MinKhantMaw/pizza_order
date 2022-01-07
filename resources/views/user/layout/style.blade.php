@@ -10,6 +10,9 @@
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="{{ asset('customer/assets/favicon.ico') }}" />
     <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="{{ asset('customer/css/styles.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('customer/css/list.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
@@ -32,8 +35,9 @@
                     <li class="nav-item mt-2"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item mt-2"><a class="nav-link" href="#pizza">Pizza</a></li>
                     <li class="nav-item mt-2"><a class="nav-link" href="#contact">Contact</a></li>
-                    <li class="nav-item mt-2"><span class="nav-link text-info mr-3">{{Auth::user()->name}}</span></li>
-                     <form action="{{route('logout')}}" method="post" class="d-flex mt-1">
+                    <li class="nav-item mt-2"><span class="nav-link text-info mr-3">{{ Auth::user()->name }}</span>
+                    </li>
+                    <form action="{{ route('logout') }}" method="post" class="d-flex mt-1">
                         @csrf
                         <input type="submit" class="btn btn-outline-danger text-white " value="Logout" />
                     </form>
@@ -54,7 +58,11 @@
     <!-- Bootstrap core JS-->
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/
-        dist/js/bootstrap.bundle.min.js"></script>
+                dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
     <!-- Core theme JS-->
     <script src="{{ asset('customer/js/scripts.js') }}"></script>
     <script src="{{ asset('') }}"></script>
