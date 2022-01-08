@@ -24,7 +24,7 @@
             <h5 >Buy 1 get 1</h5>
             @if ($pizza->buy_one_get_one_status == 1)
                <span class="text-primary"> This item is available.</span>
-            @elseif ($piza->buy_one_get_one_status==0)
+            @elseif ($pizza->buy_one_get_one_status==0)
                <span class="text-primary"> This item is not available.</span>
             @endif
             <hr>

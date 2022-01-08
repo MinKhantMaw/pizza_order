@@ -19,9 +19,10 @@
             <div class="col-3 me-5">
                 <div class="">
                     <div class="py-5 text-center">
-                        <form class="d-flex m-5">
+                        <form class="d-flex m-5" method="get" action="{{ route('user#pizzaSearch') }}">
+                            @csrf
                             <div class="input-group">
-                                <input class="form-control " placeholder="Search" aria-label="Search">
+                                <input class="form-control" name="searchData" placeholder="Search" aria-label="Search">
                                 <button class="btn btn-dark" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -29,17 +30,14 @@
                         </form>
 
                         <div class="text-dark">
-                            <a href="{{route('user#index')}}" class="text-decoration-none item">
+                            <a href="{{ route('user#index') }}" class="text-decoration-none item">
                                 <div class="m-2 p-2">All</div>
                             </a>
                             @foreach ($category as $item)
-                                <a href="{{route('user#itemSearch',$item->category_id)}}" class="text-decoration-none item">
+                                <a href="{{ route('user#itemSearch', $item->category_id) }}"
+                                    class="text-decoration-none item">
                                     <div class="m-2 p-2">{{ $item->category_name }}</div>
                                 </a>
-                                {{-- <div class="m-2 p-2">{{$category['category_name']}}</div> --}}
-                                {{-- <div class="m-2 p-2">{{$category['category_name']}}</div> --}}
-                                {{-- <div class="m-2 p-2">{{$category['category_name']}}</div> --}}
-                                {{-- <div class="m-2 p-2">{{$category['category_name']}}</div> --}}
                             @endforeach
                         </div>
                         <hr>
@@ -65,42 +63,52 @@
             </div>
             <div class="mt-5">
                 <div class="row gx-4 gx-lg-5">
-                    @foreach ($pizza as $item)
-                        <div class="col-md-4 mb-5" id="pizza">
-                            <div class="card h-70">
-                                <!-- Sale badge-->
+                    @if ($status == 1)
+                        @foreach ($pizza as $item)
+                            <div class="col-md-4 mb-5" id="pizza">
+                                <div class="card h-70">
+                                    <!-- Sale badge-->
 
-                                @if ($item->buy_one_get_one_status == 1)
-                                    <div class="badge bg-danger text-white position-absolute"
-                                        style="top: 0.1rem; right: 0.1rem">
-                                        Buy 1 get 1</div>
-                                @endif
+                                    @if ($item->buy_one_get_one_status == 1)
+                                        <div class="badge bg-danger text-white position-absolute"
+                                            style="top: 0.1rem; right: 0.1rem">
+                                            Buy 1 get 1</div>
+                                    @endif
 
-                                <!-- Product image-->
-                                <img class="card-img-top" id="pizza-img" src="{{ asset('images/' . $item->image) }}"
-                                    height="150px" width="200px" alt="..." />
-                                <!-- Product details-->
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <!-- Product name-->
-                                        <h5 class="fw-bolder">{{ $item['pizza_name'] }}</h5>
-                                        <!-- Product price-->
-                                        <span class="text-muted text-decoration-line-through"></span>
-                                        {{ $item->price }} Kyates
+                                    <!-- Product image-->
+                                    <img class="card-img-top" id="pizza-img" src="{{ asset('images/' . $item->image) }}"
+                                        height="150px" width="200px" alt="..." />
+                                    <!-- Product details-->
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!-- Product name-->
+                                            <h5 class="fw-bolder">{{ $item['pizza_name'] }}</h5>
+                                            <!-- Product price-->
+                                            <span class="text-muted text-decoration-line-through"></span>
+                                            {{ $item->price }} Kyates
+                                        </div>
+
                                     </div>
-
-                                </div>
-                                <!-- Product actions-->
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                            href="{{ route('user#pizzaDetails', $item['pizza_id']) }}">More
-                                            Details</a></div>
+                                    <!-- Product actions-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                                href="{{ route('user#pizzaDetails', $item['pizza_id']) }}">More
+                                                Details</a></div>
+                                    </div>
                                 </div>
                             </div>
+                        @endforeach
+                    @else
+                        <div class="alert alert-danger text-center">
+                            <h5>This item is not available</h5>
                         </div>
-                    @endforeach
+                    @endif
                 </div>
+
             </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <span>{{ $pizza->links() }}</span>
         </div>
     </div>
 
@@ -127,8 +135,8 @@
                     <p class="text-danger">{{ $errors->first('email') }}</p>
                 @endif
                 <textarea class="form-control my-3" name="message" rows="3" placeholder="Enter Message">
-                                    {{ old('message') }}
-                            </textarea>
+                                                                                    {{ old('message') }}
+                                                                            </textarea>
                 @if ($errors->has('message'))
                     <p class="text-danger">{{ $errors->first('message') }}</p>
                 @endif
