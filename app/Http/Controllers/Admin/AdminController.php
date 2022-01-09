@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -73,7 +74,7 @@ class AdminController extends Controller
 
         }
     }
-   
+    
     private function requestProfileData($request)
     {
         return [

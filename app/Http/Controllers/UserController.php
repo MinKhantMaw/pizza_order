@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use auth;
+use Carbon\Carbon;
+use App\Models\Order;
 use App\Models\Pizza;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -21,6 +26,7 @@ class UserController extends Controller
     public function pizzaDetails($id)
     {
         $pizza = Pizza::where('pizza_id', $id)->first();
+        Session::put('pizza_details', $pizza);
         return view('user.detail')->with(['pizza' => $pizza]);
     }
     public function itemSearch($id)
@@ -66,5 +72,44 @@ class UserController extends Controller
         $status = count($query) == 0 ? 0 : 1;
         $category = Category::get();
         return view('user.home')->with(['pizza' => $query, 'category' => $category, 'status' => $status]);
+    }
+    public function order()
+    {
+        $pizzaInfo = Session::get('pizza_details');
+        // dd($pizzaInfo->toArray());
+        return view('user.order')->with(['pizza' => $pizzaInfo]);
+    }
+    public function orderPage(Request $request)
+    {
+        $pizzaInfo=Session::get('pizza_details');
+        $userId=auth()->user()->id;
+        $count=$request->pizzaCount;
+        $validator = Validator::make($request->all(), [
+            'pizzaCount' => 'required',
+            'payment'   =>'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+       $orderData=$this->requestOrderData($pizzaInfo,$userId,$request);
+       for ($i=0; $i < $count; $i++) {
+           Order::create($orderData);
+       }
+       $waitingTime=$pizzaInfo['waiting_time'] * $count ;
+       return back()->with(['totalTime'=>$waitingTime]);
+    }
+
+    private function requestOrderData($pizzaInfo,$userId,$request){
+        return [
+            'customer_id' => $userId,
+            'pizza_id' =>$pizzaInfo['pizza_id'],
+            'carrier_id' =>0,
+            'payment_status'=>$request['payment'],
+            'order_time' => Carbon::now(),
+        ];
     }
 }
