@@ -74,4 +74,5 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('item/search/{id}', 'UserController@itemSearch')->name('user#itemSearch');
     Route::get('pizza/details/{id}', 'UserController@pizzaDetails')->name('user#pizzaDetails');
     Route::get('pizza/search', 'UserController@pizzaSearch')->name('user#pizzaSearch');
+    Route::get('search/price','UserController@searchPrice')->name('user#searchPrice');
 });

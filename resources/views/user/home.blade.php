@@ -41,23 +41,25 @@
                             @endforeach
                         </div>
                         <hr>
-                        <div class="text-center m-4 p-2">
-                            <h3 class="mb-3">Start Date - End Date</h3>
-
-                            <form>
-                                <input type="date" name="" id="" class="form-control"> -
-                                <input type="date" name="" id="" class="form-control">
-                            </form>
-                        </div>
-                        <hr>
-                        <div class="text-center m-4 p-2">
-                            <h3 class="mb-3">Min - Max Amount</h3>
-
-                            <form>
-                                <input type="number" name="" id="" class="form-control" placeholder="minimum price"> -
-                                <input type="number" name="" id="" class="form-control" placeholder="maximun price">
-                            </form>
-                        </div>
+                        <form action="{{ route('user#searchPrice') }}" method="get">
+                            @csrf
+                            <div class="text-center m-4 p-2">
+                                <h3 class="mb-3">Start Date - End Date</h3>
+                                <input type="date" name="startDate" id="" class="form-control"> -
+                                <input type="date" name="endDate" id="" class="form-control">
+                            </div>
+                            <hr>
+                            <div class="text-center m-4 p-2">
+                                <h3 class="mb-3">Min - Max Amount</h3>
+                                <input type="number" name="minPrice" id="" class="form-control"
+                                    placeholder="minimum price"> -
+                                <input type="number" name="maxPrice" id="" class="form-control"
+                                    placeholder="maximun price">
+                            </div>
+                            <button class="btn btn-dark " type="submit">
+                                Search <i class="fas fa-search"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -135,8 +137,8 @@
                     <p class="text-danger">{{ $errors->first('email') }}</p>
                 @endif
                 <textarea class="form-control my-3" name="message" rows="3" placeholder="Enter Message">
-                                                                                    {{ old('message') }}
-                                                                            </textarea>
+                                                                                                        {{ old('message') }}
+                                                                                                </textarea>
                 @if ($errors->has('message'))
                     <p class="text-danger">{{ $errors->first('message') }}</p>
                 @endif
