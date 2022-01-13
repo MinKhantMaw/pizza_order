@@ -38,10 +38,13 @@
                                     <a href="{{ route('admin#addCategory') }}">
                                         <button class="btn btn-sm btn-outline-dark">Add Category</button>
                                     </a>
-                                    <b class="ml-5">Total Pizza Category - {{$category->total()}}</b>
+                                    <b class="ml-5">Total Pizza Category - {{ $category->total() }}</b>
                                 </h3>
 
-                                <div class="card-tools">
+                                <div class="card-tools d-flex">
+                                    <a href="{{ route('admin#csvDownload') }}"> <button
+                                            class="btn btn-sm mr-1 mt-1 btn-success">Download CVS</button>
+                                    </a>
                                     <form action="{{ route('admin#search') }}" method="get">
                                         @csrf
                                         <div class="input-group input-group-sm mt-1" style="width: 150px;">
@@ -75,10 +78,11 @@
                                                 <td>{{ $item->category_id }}</td>
                                                 <td>{{ $item->category_name }}</td>
                                                 <td>
-                                                    @if ($item->count==0)
-                                                        <a href="#" class="text-decoration-none">{{$item->count}}</a>
+                                                    @if ($item->count == 0)
+                                                        <a href="#" class="text-decoration-none">{{ $item->count }}</a>
                                                     @else
-                                                        <a href="{{ route('admin#categoryItem', $item->category_id) }} " class="text-decoration-none">{{$item->count}}</a>
+                                                        <a href="{{ route('admin#categoryItem', $item->category_id) }} "
+                                                            class="text-decoration-none">{{ $item->count }}</a>
                                                     @endif
                                                 </td>
                                                 <td>
