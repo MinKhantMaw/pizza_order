@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\UserCheckMiddleware;
+use App\Http\Middleware\AdminCheckMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +31,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     }
 })->name('dashboard');
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin','middleware'=>[AdminCheckMiddleware::class]], function () {
     // Profile Controller
-    Route::get('/profile', 'AdminController@profile')->name('admin#profile');
+    Route::get('/profile', 'AdminController@profile')->name('admin#profile')->middleware(AdminCheckMiddleware::class);
     Route::post('/updateProfile/{id}', 'AdminController@updateProfile')->name('admin#updateProfile');
     Route::get('/changePassword', 'AdminController@changePasswordPage')->name('admin#changePasswordPage');
     Route::post('/changePassword/{id}', 'AdminController@changePassword')->name('admin#changePassword');
@@ -54,6 +56,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/infoPizza/{id}', 'PizzaController@infoPizza')->name('admin#infoPizza');
     Route::post('/updatePizza/{id}', 'PizzaController@updatePizza')->name('admin#updatePizza');
     Route::get('pizza/search', 'PizzaController@searchPizza')->name('admin#pizza');
+    Route::get('pizza/csv/download','PizzaController@downloadPizzaCSV')->name('admin#pizzacsv');
 
     // Auth Controller
     Route::get('/userList', 'AuthController@userList')->name('admin#userList');
@@ -71,7 +74,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('order/search/', 'OrderController@orderSearch')->name('admin#orderSearch');
 });
 
-Route::group(['prefix' => 'user'], function () {
+Route::group(['prefix' => 'user','middleware' => [UserCheckMiddleware::class]], function () {
     Route::get('/', 'UserController@index')->name('user#index');
 
 // Contact Controller

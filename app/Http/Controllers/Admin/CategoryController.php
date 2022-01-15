@@ -115,7 +115,8 @@ class CategoryController extends Controller
                 ->groupBy('categories.category_id')
                 ->get();
 
-        } else {
+        }
+        else {
 
             $category = Category::select('categories.*', DB::raw('COUNT(pizzas.category_id) as count'))
                 ->leftJoin('pizzas', 'pizzas.category_id', 'categories.category_id')

@@ -42,17 +42,19 @@
                                         </button>
                                     </a>
                                 </h3>
-                                <b class="ml-5">Total Pizza - {{$pizza->total()}}</b>
-                                <div class="card-tools ">
+                                <b class="ml-5">Total Pizza - {{ $pizza->total() }}</b>
+                                <div class="card-tools d-flex">
+                                    <a href="{{ route('admin#pizzacsv') }}"><button
+                                            class="btn btn-success btn-sm mt-1 mr-1">Download CSV</button></a>
                                     <form action="{{ route('admin#pizza') }}" method="get">
                                         @csrf
-                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                        <div class="input-group input-group-sm mt-1" style="width: 150px;">
 
                                             <input type="text" name="pizza_search" class="form-control float-right"
                                                 placeholder="Search">
 
                                             <div class="input-group-append">
-                                                <button type="submit" class="btn btn-default">
+                                                <button type="submit" class="btn btn-default ">
                                                     <i class="fas fa-search"></i>
                                                 </button>
                                             </div>
@@ -93,14 +95,14 @@
                                                     <td>
                                                         @if ($item['publish_status'] == 1)
                                                             Publish
-                                                        @elseif ($item['publish_status'] ==0)
+                                                        @elseif ($item['publish_status'] == 0)
                                                             Unpublish
                                                         @endif
                                                     </td>
                                                     <td>
                                                         @if ($item['buy_one_get_one_status'] == 1)
                                                             Yes
-                                                        @elseif ($item['buy_one_get_one_status'] ==0)
+                                                        @elseif ($item['buy_one_get_one_status'] == 0)
                                                             No
                                                         @endif
                                                     </td>
